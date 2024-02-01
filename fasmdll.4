@@ -1,0 +1,45 @@
+REQUIRE CASE-INS	lib/ext/caseins.f
+winapi: fasm_Assemble lib/asm/fasm.dll
+2048 constant bufsize
+create buf bufsize allot
+require s>zalloc ~nn/lib/az.f
+
+: s1 buf 4 + @ ;
+: s2 buf 8 + @ ; 
+: .err ." error: " s1 . ." line: " s2 4 + @ . ;
+: asmerr? 0 <> ; 
+: assemble >r 0 100 bufsize buf r> str@ s>zalloc fasm_Assemble asmerr? if .err else s2 s1 then ;
+
+: ;fasm assemble here swap dup allot cmove> ;
+
+\ EOF
+\ example mmx linear multiply range of vectors by one vector (4 doubles):
+
+header v* ( @first @last @vector -- ) 
+"
+use32
+
+movups xmm0, [eax]
+mov edx, [ebp]
+mov ebx, [ebp+4]
+
+.nextQuad:
+movups xmm1, [ebx]
+pmulld xmm1, xmm0
+movups [ebx], xmm1
+lea ebx, [ebx+16]
+cmp ebx, edx
+jnge .nextQuad
+
+mov eax, [ebp+8]
+lea ebp, [ebp+12]
+retn      
+"
+;fasm
+
+\ Create an array of quads:
+
+here here 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , here here 1 , 2 , 3 , 4 , 
+ok.
+v*
+48 dump

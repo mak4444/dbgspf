@@ -1,0 +1,1 @@
+spf4mwc.exe ~mak\lib\notepad.f 

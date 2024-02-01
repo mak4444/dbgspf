@@ -1,0 +1,13 @@
+CREATE FL_BUF 256 ALLOT
+
+: FILE>BUF ( <file namew> -- )
+  R/O  OPEN-FILE  THROW >R
+        FL_BUF 256 R@ READ-FILE THROW DROP
+   R> CLOSE-FILE DROP
+;
+
+S" spf4mwc.ini" FILE>BUF
+
+FL_BUF 256 DUMP
+
+
