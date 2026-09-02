@@ -1,1 +1,1 @@
-spf4mwc.exe samples\~mak\WIN\EDIT\Edit.F
+spf4mwc.exe samples\~mak\WIN\EDIT\ED.F
