@@ -34,7 +34,7 @@ REQUIRE CASE-INS	lib\ext\caseins.f
 CASE-INS OFF
 
  REQUIRE  Z" ~mak/~yz/lib/common.f
-S" adds.f"	INCLUDED
+\ S" adds.f"	INCLUDED
 REQUIRE AddToRFL	~af\lib\rfl.f
 
 
