@@ -16,6 +16,8 @@ REQUIRE $! ~mak\place.f
 
 REQUIRE RSendMessageA ~mak\LIB\rwin.f 
 
+\- DUP>R : DUP>R S" DUP >R" EVALUATE ; IMMEDIATE
+
 0 VALUE ZZFF
 1 VALUE ZFFF
 
@@ -53,7 +55,7 @@ VARIABLE VXY CELL ALLOT
 \ \ gforth\extend.fs 
     2>R 2DUP
     BEGIN
-      DUP 1+ R@ > \ ïîêà äëèíû äîñòàòî÷íî
+      DUP 1+ R@ > \ Ã¯Ã®ÃªÃ  Ã¤Ã«Ã¨Ã­Ã» Ã¤Ã®Ã±Ã²Ã Ã²Ã®Ã·Ã­Ã®
     WHILE
       OVER 2R@ TUCK CEQUAL-U 0=
       IF 2RDROP 2SWAP 2DROP TRUE EXIT THEN
@@ -354,12 +356,12 @@ TRUE VALUE ?in
 0x100 VALUE    MAXLIN
  0 VALUE tib
  0 VALUE >in
- 0 VALUE KEY_EVENT_GUI       \ event íà KEY
+ 0 VALUE KEY_EVENT_GUI       \ event Ã­Ã  KEY
  0 VALUE LastKey
 
-  0 VALUE LruBuf              \ áóôåð history (last recently used)
-  8 VALUE LruNum              \ ÷èñëî çàïîìèíàåìûõ ñîîáùåíèé lru
-255 VALUE LruLen              \ ðàçìåð îäíîé ñòðîêè áóôåðà lru
+  0 VALUE LruBuf              \ Ã¡Ã³Ã´Ã¥Ã° history (last recently used)
+  8 VALUE LruNum              \ Ã·Ã¨Ã±Ã«Ã® Ã§Ã Ã¯Ã®Ã¬Ã¨Ã­Ã Ã¥Ã¬Ã»Ãµ Ã±Ã®Ã®Ã¡Ã¹Ã¥Ã­Ã¨Ã© lru
+255 VALUE LruLen              \ Ã°Ã Ã§Ã¬Ã¥Ã° Ã®Ã¤Ã­Ã®Ã© Ã±Ã²Ã°Ã®ÃªÃ¨ Ã¡Ã³Ã´Ã¥Ã°Ã  lru
 
 VARIABLE  CurrFromLru
 
@@ -390,16 +392,16 @@ console_font_width  ( -10) logfont lfWidth  !
   E?R/O IF MB_OK MB_ICONSTOP OR MB_SYSTEMMODAL OR
            S" EDIT" DROP  S" The file is saveless" DROP  0 MessageBoxA DROP
  EXIT THEN
-  \ ïîëó÷àåì ñîäåðæèìîå îêíà Script
+  \ Ã¯Ã®Ã«Ã³Ã·Ã Ã¥Ã¬ Ã±Ã®Ã¤Ã¥Ã°Ã¦Ã¨Ã¬Ã®Ã¥ Ã®ÃªÃ­Ã  Script
   0 0 WM_GETTEXTLENGTH SendToEd 1+ DUP TO SizeEd
 
   ALLOCATE THROW DUP TO Content
   SizeEd WM_GETTEXT SendToEd DROP
-  \ îòêðûâàåì ôàéë
+  \ Ã®Ã²ÃªÃ°Ã»Ã¢Ã Ã¥Ã¬ Ã´Ã Ã©Ã«
    fna fnl W/O CREATE-FILE THROW TO fid
-  \ çàïèñûâàåì êîä â ôàéë
+  \ Ã§Ã Ã¯Ã¨Ã±Ã»Ã¢Ã Ã¥Ã¬ ÃªÃ®Ã¤ Ã¢ Ã´Ã Ã©Ã«
   Content SizeEd 1- fid WRITE-FILE THROW
-  \ çàêðûâàåì ôàéë è áóôåð
+  \ Ã§Ã ÃªÃ°Ã»Ã¢Ã Ã¥Ã¬ Ã´Ã Ã©Ã« Ã¨ Ã¡Ã³Ã´Ã¥Ã°
   Content FREE THROW
   fid CLOSE-FILE THROW
   0 0 EM_SETMODIFY SendToEd DROP
@@ -573,7 +575,7 @@ Content 44 DUMP
 
 
 \ *\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\***
-\ **\\\\\ îêîííàÿ ôóíêöèÿ \\\\\\\\\\\\\**
+\ **\\\\\ Ã®ÃªÃ®Ã­Ã­Ã Ã¿ Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¿ \\\\\\\\\\\\\**
 \ ***\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
 
  S" EDIT.LOG" W/O CREATE-FILE-SHARED THROW CONSTANT EDIT.LOG
@@ -616,7 +618,7 @@ lpar wpar msg hwnd EdWndProc CallWindowProcA
 
 WNDPROC: MyEdWndProc
 
-IMAGE-BASE CONSTANT HINST  \ Instance òåêóùåãî ïðèëîæåíèÿ
+IMAGE-BASE CONSTANT HINST  \ Instance Ã²Ã¥ÃªÃ³Ã¹Ã¥Ã£Ã® Ã¯Ã°Ã¨Ã«Ã®Ã¦Ã¥Ã­Ã¨Ã¿
 
   3 CONSTANT EdID
 
@@ -845,7 +847,7 @@ HERE   /WNDCLASS ALLOT
  TASK_EDIT
 ;
 
-VARIABLE CC_INIT CC_INIT 0! \ ®¤­®ªà â­ ï ¨­¨æ¨ «¨§ æ¨ï CommonControls
+VARIABLE CC_INIT CC_INIT 0! \ Â®Â¤Â­Â®ÂªÃ Â Ã¢Â­Â Ã¯ Â¨Â­Â¨Ã¦Â¨Â Â«Â¨Â§Â Ã¦Â¨Ã¯ CommonControls
 CREATE   CC_INITS 8 , 0xFFFF ,
 
 : InitControls
@@ -868,7 +870,7 @@ InitControls
     ELSE EDIT_Load  EDIT_XY 2@ EDIT_XY_SET
     THEN 100 PAUSE ;
 
-: EDIT_ERROR ( ERR-NUM -> ) \ ïîêàçàòü ðàñøèôðîâêó îøèáêè
+: EDIT_ERROR ( ERR-NUM -> ) \ Ã¯Ã®ÃªÃ Ã§Ã Ã²Ã¼ Ã°Ã Ã±Ã¸Ã¨Ã´Ã°Ã®Ã¢ÃªÃ³ Ã®Ã¸Ã¨Ã¡ÃªÃ¨
   [ ' ERROR >BODY @ COMPILE, ]
   ERR-FILE NIP \ cmdDBG ED_WATE <> AND
   IF   NEXT_F  ERR-FILE EDIT_FN!
